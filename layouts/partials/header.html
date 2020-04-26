@@ -1,12 +1,9 @@
 <header>
-	<a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a>
-	{{ with .Site.Menus.main }}
-	<nav>
-		<ul>
-			{{ range . }}
-			<li><a href="{{ .URL | relURL }}">{{ .Name }}</a></li>
-			{{ end }}
-		</ul>
-	</nav>
-	{{ end }}
+  <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+  <nav>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="https://okomestudio.net">OkomeStudio.net</a></li>
+      <li class="active"><a href="{{ .Site.BaseURL }}about">About</a></li>
+    </ul>
+  </nav>
 </header>
