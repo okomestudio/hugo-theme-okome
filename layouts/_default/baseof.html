@@ -1,20 +1,44 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.LanguageCode | default "en-us" }}">
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+  {{ with .Site.GoogleAnalytics -}}
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', '{{ . }}');
+  </script>
+  {{- end }}
+  {{ with .Site.Params.googleTagManager -}}
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){
+      w[l]=w[l]||[];w[l].push(
+        {'gtm.start':
+         new Date().getTime(),event:'gtm.js'}
+      );var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','{{ . }}');
+  </script>
+  <!-- End Google Tag Manager -->
+  {{- end}}
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#000000">
-  <meta name="description" content="Okome Studio is a software consultancy">
-	{{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
-	{{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  {{ with .Site.Params.description }}<meta name="description" content="{{ . }}">{{ end }}
+  {{ with .Site.Params.author }}<meta name="author" content="{{ . }}">{{ end }}
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link rel="icon" href="https://okomestudio.net/favicon.ico">
   <link rel="stylesheet" href="https://okomestudio.net/reset.css">
   <link rel="stylesheet" href="https://okomestudio.net/index.css">
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/codesyntax.css" | relURL }}">
   <link rel="stylesheet" href="{{ "css/gist.css" | relURL }}">
-  <title>Welcome — {{ .Title }}</title>
+  <title>{{ .Title }}</title>
 
   <script type="text/javascript">
     window.MathJax = {
@@ -29,17 +53,28 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS_CHTML">
   </script>
 
-  <script type="text/javascript" src="{{ "css/pjump.js" | relURL }}"></script>
+  <script type="text/javascript" src="{{ "static/js/pjump.js" | relURL }}"></script>
 
   {{ with .OutputFormats.Get "RSS" -}}
   {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
-	{{- end }}
+  {{- end }}
 </head>
 <body>
+
+  {{ with .Site.Params.googleTagManager -}}
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id={{ . }}"
+            height="0" width="0" style="display:none;visibility:hidden">
+    </iframe>
+  </noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  {{- end }}
+
   <div class="container">
-	{{ partial "header" . }}
-	{{ block "main" . }}{{ end }}
-	{{ partial "footer" . }}
+  {{ partial "header" . }}
+  {{ block "main" . }}{{ end }}
+  {{ partial "footer" . }}
   </div>
 </body>
 </html>
