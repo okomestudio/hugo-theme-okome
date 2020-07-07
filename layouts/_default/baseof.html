@@ -41,11 +41,6 @@
   <title>{{ .Title }}</title>
 
   <script type="text/javascript">
-    window.MathJax = {
-      tex: {
-        tags: 'ams'
-      }
-    };
     MathJax = {
       chtml: {
         scale: 0.8,
@@ -54,7 +49,8 @@
         inlineMath: [['$', '$'], ['\\(', '\\)']],
         displayMath: [['$$','$$'], ['\\[', '\\]']],
         processEscapes: true,
-        processEnvironments: true
+        processEnvironments: true,
+        tags: 'ams',
       },
       svg: {
         fontCache: 'global',
@@ -65,7 +61,10 @@
     };
 
     window.addEventListener('load', (event) => {
-      document.querySelectorAll("mjx-container").forEach(function(x){x.parentElement.classList += 'has-jax'})
+      document.querySelectorAll("mjx-container").forEach(
+        function(x){
+          x.parentElement.classList += 'has-jax'
+      })
     });
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
