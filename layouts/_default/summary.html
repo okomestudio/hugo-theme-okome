@@ -1,8 +1,21 @@
 <article class="blog-post">
-	<h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
+  <h1><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
   {{ if .Summary }}
+  {{ $authorVarType := (printf "%T" .Params.author ) }}
   <p class="meta">
-    Written by {{ .Params.author | default "Okome Studio" }}
+    Written by
+    {{ if eq $authorVarType "[]string" }}
+      {{ range .Params.author }}
+        {{ . }},
+      {{ else }}
+        Okome Studio
+      {{ end }}
+    {{ else if eq $authorVarType "string" }}
+      {{ .Params.author }}
+    {{ else }}
+      Okome Studio
+    {{ end }}
+
     on <time>{{ .Date.Format "January 2, 2006" }}</time>.
     Tagged:
 	  {{ range .Params.tags }}
