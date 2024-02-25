@@ -18,6 +18,22 @@ h3 {
   font-style: normal;
 }
 
+hr {
+  border-top: thin solid var(--main-text-color);
+  text-align: center;
+  margin: 3em 5em;
+}
+
+hr:after {
+  content: "§§§";
+  position: relative;
+  top: -0.85em;
+  font-size: 1.0em;
+  padding: 0 0.25em;
+  color: var(--main-text-color);
+  background: white;
+}
+
 table {
   border-collapse: collapse;
   margin: 1em auto;
