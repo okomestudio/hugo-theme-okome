@@ -19,7 +19,7 @@
     on <time>{{ .Date.Format "January 2, 2006" }}</time>.
     Tagged:
 	  {{ range .Params.tags }}
-	  <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}">{{ . }}</a>
+	  <a href="{{ "./tags/" | relURL }}{{ . | urlize }}">{{ . }}</a>
 	  {{ end }}
   </p>
   {{ end }}
